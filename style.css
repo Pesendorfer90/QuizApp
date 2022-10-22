@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(170, 190, 224) !important;
+    background-color: rgb(170, 224, 221) !important;
     height: 100vh;
 }
 
@@ -28,4 +28,12 @@ body {
 
 .bg-success, .bg-danger {
     color: white;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
 }

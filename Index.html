@@ -30,8 +30,18 @@
 
     <div class="container">
         <div class="card quiz-card">
-            <img src="img/quiz-time.jpg" class="card-img-top">
-            <div class="card-body">
+            <img id="quiz-img" src="img/quiz-time.jpg" class="card-img-top">
+           
+            <div class="card-body" id="end-screen" style="display: none;">
+                <div class="text-center"><h2>Quiz beendet!</h2></div>
+
+                <div><img class="width-100" src="img/trophy-gc4f418ff7_1280.png"></div>
+
+                <div class="text-center">Du hast <b id="amount-of-right-questions">X</b> von <b id="question-lenght2">X</b> Fragen richtig beantwortet.</div>
+
+            </div>
+           
+            <div class="card-body" id="question-body">
                 <h5 class="card-title" id="questiontext">Frage</h5>
 
                 <div class="card quiz-answer-card mb-2" onclick="answer('answer_1')">
@@ -59,7 +69,7 @@
                 </div>
 
                 <div class="quiz-footer">
-                    <div><b>1</b> von <b id="question-lenght">5</b></div> <button class="btn btn-primary" id="next-button" onclick="nextQuestion()" disabled>Nächste Frage</button>
+                    <div><b id="question-number">1</b> von <b id="question-lenght">5</b></div> <button class="btn btn-primary" id="next-button" onclick="nextQuestion()" disabled>Nächste Frage</button>
                 </div>
             </div>
         </div>
