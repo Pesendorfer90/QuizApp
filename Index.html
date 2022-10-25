@@ -31,13 +31,23 @@
     <div class="container">
         <div class="card quiz-card">
             <img id="quiz-img" src="img/quiz-time.jpg" class="card-img-top">
-           
+           <!-- document.getElementById('quiz-img').scr = img/img/trophy-gc4f418ff7_1280.png; -->
+           <!-- Script um Pfad von img zu ändern -->
+
+           <div id="progress-container" class="progress">
+            <div class="progress-bar" id="progress-bar" role="progressbar" aria-label="Example with label" style="width: 0%;">25%</div>
+          </div>
+
             <div class="card-body" id="end-screen" style="display: none;">
                 <div class="text-center"><h2>Quiz beendet!</h2></div>
 
                 <div><img class="width-100" src="img/trophy-gc4f418ff7_1280.png"></div>
 
                 <div class="text-center">Du hast <b id="amount-of-right-questions">X</b> von <b id="question-lenght2">X</b> Fragen richtig beantwortet.</div>
+
+                <div class="button-row">
+                    <button class="btn btn-primary" id="restart" onclick="restart()">Erneut spielen</button>
+                </div>
 
             </div>
            

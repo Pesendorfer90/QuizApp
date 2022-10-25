@@ -59,8 +59,9 @@ let questions = [
 
 
 let currentQuestion = 0;
-
 let rightAnswers = 0;
+let AUDIO_SUCCES = new Audio('audio/win.mp3');
+let AUDIO_FAIL = new Audio('audio/fail.mp3');
 
 
 function init() {
@@ -76,8 +77,16 @@ function showQuestion() {
         document.getElementById('quiz-img').style = 'display: none'
         document.getElementById('question-lenght2').innerHTML = questions.length;
         document.getElementById('amount-of-right-questions').innerHTML = rightAnswers;
+        document.getElementById('progress-container').style = 'display: none'
+
 
     } else {
+
+        let percent = (currentQuestion + 1) / questions.length;
+        percent = Math.round(percent * 100);                                // math.round ist zahlen ab/aufrunden
+        console.log('Fortschritt:', percent)
+        document.getElementById('progress-bar').innerHTML = `${percent}%`
+        document.getElementById('progress-bar').style = `width:${percent}%`
 
     let question = questions[currentQuestion];
 
@@ -101,10 +110,12 @@ function answer(selection) {
         console.log('Richtige Antwort!');
         document.getElementById(selection).parentNode.classList.add('bg-success');
         rightAnswers++;
+        AUDIO_SUCCES.play();
     } else {
         console.log('Falsche Antwort!');
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+        AUDIO_FAIL.play();
     }
     document.getElementById('next-button').disabled = false;
 }
@@ -127,4 +138,15 @@ function resetButtons() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+}
+
+
+function restart() {
+    document.getElementById('end-screen').style = 'display: none'
+    document.getElementById('question-body').style = ''
+    document.getElementById('quiz-img').style = ''
+    currentQuestion = 0;
+    rightAnswers = 0;
+    document.getElementById('progress-container').style = ''
+    init();
 }
