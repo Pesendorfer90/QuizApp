@@ -71,40 +71,56 @@ function init() {
 
 
 function showQuestion() {
-    if (currentQuestion == questions.length) {
-        document.getElementById('end-screen').style = ''
-        document.getElementById('question-body').style = 'display: none'
-        document.getElementById('quiz-img').style = 'display: none'
-        document.getElementById('question-lenght2').innerHTML = questions.length;
-        document.getElementById('amount-of-right-questions').innerHTML = rightAnswers;
-        document.getElementById('progress-container').style = 'display: none'
+    if (gameIsOver()) {
+        showEndScreen();
 
 
     } else {
+        updateProgressbar();
+        updateToNextQuestion();
+    }
+}
 
-        let percent = (currentQuestion + 1) / questions.length;
-        percent = Math.round(percent * 100);                                // math.round ist zahlen ab/aufrunden
-        console.log('Fortschritt:', percent)
-        document.getElementById('progress-bar').innerHTML = `${percent}%`
-        document.getElementById('progress-bar').style = `width:${percent}%`
 
+function gameIsOver() {
+    return currentQuestion == questions.length;                          // return gibt dann true oder false aus
+}
+
+
+function updateProgressbar() {
+    let percent = (currentQuestion + 1) / questions.length;
+    percent = Math.round(percent * 100);                                // math.round ist zahlen ab/aufrunden
+    console.log('Fortschritt:', percent);
+    document.getElementById('progress-bar').innerHTML = `${percent}%`;
+    document.getElementById('progress-bar').style = `width:${percent}%`;
+}
+
+
+function updateToNextQuestion() {
     let question = questions[currentQuestion];
-
     document.getElementById('questiontext').innerHTML = question['question'];
     document.getElementById('answer_1').innerHTML = question['answer_1'];
     document.getElementById('answer_2').innerHTML = question['answer_2'];
     document.getElementById('answer_3').innerHTML = question['answer_3'];
     document.getElementById('answer_4').innerHTML = question['answer_4'];
     document.getElementById('question-number').innerHTML = currentQuestion + 1;
-    }
+}
+
+
+function showEndScreen() {
+    document.getElementById('end-screen').style = '';
+    document.getElementById('question-body').style = 'display: none';
+    document.getElementById('quiz-img').style = 'display: none';
+    document.getElementById('question-lenght2').innerHTML = questions.length;
+    document.getElementById('amount-of-right-questions').innerHTML = rightAnswers;
+    document.getElementById('progress-container').style = 'display: none';
 }
 
 
 function answer(selection) {
     let question = questions[currentQuestion];
     let selectedQuestionNumber = selection.slice(-1);                   // über die function kommt ein parameter (selection) mit selection.slice(-1) bekommt man den hintersten buchstaben oder zahl. dieser eine buchstabe oder zahl ist dann selectedQuestionNumber
-
-    let idOfRightAnswer = `answer_${question['right_answer']}`
+    let idOfRightAnswer = `answer_${question['right_answer']}`;
 
     if (selectedQuestionNumber == question['right_answer']) {
         console.log('Richtige Antwort!');
@@ -142,11 +158,11 @@ function resetButtons() {
 
 
 function restart() {
-    document.getElementById('end-screen').style = 'display: none'
-    document.getElementById('question-body').style = ''
-    document.getElementById('quiz-img').style = ''
+    document.getElementById('end-screen').style = 'display: none';
+    document.getElementById('question-body').style = '';
+    document.getElementById('quiz-img').style = '';
     currentQuestion = 0;
     rightAnswers = 0;
-    document.getElementById('progress-container').style = ''
+    document.getElementById('progress-container').style = '';
     init();
 }
